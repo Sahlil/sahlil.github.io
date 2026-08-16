@@ -1,10 +1,10 @@
-# 👋 Hi, I'm Muhammad Sahlil Rizki 
+# Hi, I'm Muhammad Sahlil Rizki 
 
 Seorang **Praktisi IT** yang berfokus pada **Pengembangan Web & Mobile** serta **Administrasi Server**[cite: 4]. Saya memiliki pengalaman mendalam dalam ekosistem **Laravel** dan terbiasa mengelola infrastruktur server berbasis **Ubuntu** untuk memastikan aplikasi berjalan secara optimal dan aman[cite: 51, 54, 56].
 
 ---
 
-### 🛠️ Technical Stack
+### Technical Stack
 
 - **Languages:** PHP, Go, Python, TypeScript, JavaScript, HTML, CSS[cite: 50].
 - **Frameworks:** Laravel 12, CodeIgniter 4, GoFiber, GIN, Flask, React Vite[cite: 50].
@@ -14,7 +14,7 @@ Seorang **Praktisi IT** yang berfokus pada **Pengembangan Web & Mobile** serta *
 
 ---
 
-### 🚀 Featured Projects
+### Featured Projects
 
 * **Inventory Management Systems**
     * Mengembangkan dan memelihara sistem inventaris gudang berbasis web menggunakan **Laravel 12** untuk **PT Jasa Bara Anugerah (JBA)** dan **PT Raja Ayam Dubai**[cite: 26].
@@ -28,20 +28,20 @@ Seorang **Praktisi IT** yang berfokus pada **Pengembangan Web & Mobile** serta *
 
 ---
 
-### 🎓 Education & Professional Background
+### Education & Professional Background
 
 - **Diploma in Teknologi Informasi**, Politeknik Negeri Tanah Laut (IPK: 3.85/4.00)[cite: 31, 32].
 - **Keahlian Tambahan:** Troubleshooting bug pada source code, perbaikan jaringan dasar, serta pengolahan data teknis menggunakan Microsoft Excel[cite: 52, 53].
 
 ---
 
-### 📊 GitHub Stats
+### GitHub Stats
 !(https://github-readme-stats.vercel.app/api?username=Sahlil&show_icons=true&theme=dark)
 !(https://github-readme-stats.vercel.app/api/top-langs/?username=Sahlil&layout=compact&theme=dark)
 
 ---
 
-### 📫 Connect with Me
+### Connect with Me
 - **Email:** sahlilrizki43@gmail.com [cite: 2]
 - **LinkedIn:** [Muhammad Sahlil Rizki](https://www.linkedin.com/in/muhammad-sahlil-rizki)
 - **WhatsApp:** 085796690915 [cite: 2]
