@@ -34,8 +34,26 @@
           <a href="#skills">Keahlian</a>
           <a href="#contact">Kontak</a>
         </nav>
+        <button class="theme-toggle" id="themeToggle" aria-label="Ganti tema" type="button">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
       </div>
     </header>
+
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
     <main id="content">
       <section class="hero section">
@@ -135,6 +153,88 @@
         </div>
       </section>
 
+      <section id="skills" class="section alt skills-section">
+        <div class="container">
+          <div class="section-header reveal">
+            <h2>Keahlian</h2>
+            <p>
+              Teknologi yang menjadi andalan saya dalam pengembangan produk
+              digital.
+            </p>
+          </div>
+        </div>
+        <div class="skills-marquee" aria-label="Daftar keahlian">
+            <div class="marquee-track" data-direction="left">
+              <div class="marquee-content">
+              <span class="marquee-tag">HTML</span>
+              <span class="marquee-tag">CSS</span>
+              <span class="marquee-tag">JavaScript</span>
+              <span class="marquee-tag">TypeScript</span>
+              <span class="marquee-tag">PHP</span>
+              <span class="marquee-tag">Golang</span>
+              <span class="marquee-tag">Python</span>
+              <span class="marquee-tag">React</span>
+              <span class="marquee-tag">Node.js</span>
+              <span class="marquee-tag">Docker</span>
+              <span class="marquee-tag">Git</span>
+              <span class="marquee-tag">CI/CD</span>
+              <span class="marquee-tag">REST API</span>
+              <span class="marquee-tag">GraphQL</span>
+                <span class="marquee-tag">WebSocket</span>
+              </div>
+              <div class="marquee-content" aria-hidden="true">
+                <span class="marquee-tag">HTML</span>
+                <span class="marquee-tag">CSS</span>
+                <span class="marquee-tag">JavaScript</span>
+                <span class="marquee-tag">TypeScript</span>
+                <span class="marquee-tag">PHP</span>
+                <span class="marquee-tag">Golang</span>
+                <span class="marquee-tag">Python</span>
+                <span class="marquee-tag">React</span>
+                <span class="marquee-tag">Node.js</span>
+                <span class="marquee-tag">Docker</span>
+                <span class="marquee-tag">Git</span>
+                <span class="marquee-tag">CI/CD</span>
+                <span class="marquee-tag">REST API</span>
+                <span class="marquee-tag">GraphQL</span>
+                <span class="marquee-tag">WebSocket</span>
+              </div>
+            </div>
+            <div class="marquee-track" data-direction="right">
+              <div class="marquee-content">
+              <span class="marquee-tag">Laravel 12</span>
+              <span class="marquee-tag">CodeIgniter 4</span>
+              <span class="marquee-tag">GoFiber</span>
+              <span class="marquee-tag">GIN</span>
+              <span class="marquee-tag">Flask</span>
+              <span class="marquee-tag">MySQL</span>
+              <span class="marquee-tag">PostgreSQL</span>
+              <span class="marquee-tag">Ubuntu</span>
+              <span class="marquee-tag">Nginx</span>
+              <span class="marquee-tag">Midtrans</span>
+              <span class="marquee-tag">WhatsApp API</span>
+              <span class="marquee-tag">SSL/TLS</span>
+                <span class="marquee-tag">aaPanel</span>
+              </div>
+              <div class="marquee-content" aria-hidden="true">
+                <span class="marquee-tag">Laravel 12</span>
+                <span class="marquee-tag">CodeIgniter 4</span>
+                <span class="marquee-tag">GoFiber</span>
+                <span class="marquee-tag">GIN</span>
+                <span class="marquee-tag">Flask</span>
+                <span class="marquee-tag">MySQL</span>
+                <span class="marquee-tag">PostgreSQL</span>
+                <span class="marquee-tag">Ubuntu</span>
+                <span class="marquee-tag">Nginx</span>
+                <span class="marquee-tag">Midtrans</span>
+                <span class="marquee-tag">WhatsApp API</span>
+                <span class="marquee-tag">SSL/TLS</span>
+                <span class="marquee-tag">aaPanel</span>
+              </div>
+            </div>
+        </div>
+      </section>
+
       <section id="experience" class="section alt">
         <div class="container">
           <div class="section-header reveal">
@@ -145,7 +245,7 @@
             </p>
           </div>
           <div class="experience-list">
-            <article class="experience-card reveal">
+            <article class="experience-card reveal" tabindex="0">
               <div class="experience-header">
                 <h3>CV. Batuah Talenta Semesta</h3>
                 <span class="mono">Apr 2025 - Sekarang</span>
@@ -156,7 +256,7 @@
                 RSUD Hadji Boejasin.
               </p>
             </article>
-            <article class="experience-card reveal">
+            <article class="experience-card reveal" tabindex="0">
               <div class="experience-header">
                 <h3>PT. Raja Ayam Dubai</h3>
                 <span class="mono">Okt 2025 - Mar 2026</span>
@@ -167,7 +267,7 @@
                 12, serta menyusun dokumen operasional dan SOP.
               </p>
             </article>
-            <article class="experience-card reveal">
+            <article class="experience-card reveal" tabindex="0">
               <div class="experience-header">
                 <h3>Teaching Factory Pelaihari</h3>
                 <span class="mono">Agt 2024 - Jul 2025</span>
@@ -187,83 +287,120 @@
           </div>
           <div
             class="project-grid project-slider"
-            aria-label="Daftar proyek, geser ke samping"
+            aria-label="Daftar proyek, gunakan panah kiri/kanan untuk navigasi"
+            role="region"
+            tabindex="0"
           >
-            <article class="project-card reveal">
-              <h3>Sistem Manajemen Go Chicken Go</h3>
-              <p>
-                Pengembangan sistem manajemen produksi dan jual beli ayam
-                berbasis web yang mengintegrasikan layanan perpesanan.
-              </p>
-              <div class="project-tags">
-                <span class="tag">Web Development</span>
-                <span class="tag">Integrasi WhatsApp API</span>
+            <article class="project-card reveal" tabindex="0">
+              <div class="project-card-thumb">
+                <img src="assets/web-chicking.png" alt="Sistem Manajemen Go Chicken Go" loading="lazy" decoding="async" />
+              </div>
+              <div class="project-card-content">
+                <h3>Sistem Manajemen Go Chicken Go</h3>
+                <p>
+                  Pengembangan sistem manajemen produksi dan jual beli ayam
+                  berbasis web yang mengintegrasikan layanan perpesanan.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">Web Development</span>
+                  <span class="tag">Integrasi WhatsApp API</span>
+                </div>
               </div>
             </article>
-            <article class="project-card reveal">
-              <h3>Website Sistem Informasi P3M</h3>
-              <p>
-                Pembuatan website sistem informasi yang ditujukan untuk Pusat
-                Penelitian dan Pengabdian kepada Masyarakat (P3M).
-              </p>
-              <div class="project-tags">
-                <span class="tag">CodeIgniter 4</span>
+            <article class="project-card reveal" tabindex="0">
+              <div class="project-card-thumb">
+                <img src="assets/web-p3m.png" alt="Website Sistem Informasi P3M" loading="lazy" decoding="async" />
+              </div>
+              <div class="project-card-content">
+                <h3>Website Sistem Informasi P3M</h3>
+                <p>
+                  Pembuatan website sistem informasi yang ditujukan untuk Pusat
+                  Penelitian dan Pengabdian kepada Masyarakat (P3M).
+                </p>
+                <div class="project-tags">
+                  <span class="tag">CodeIgniter 4</span>
+                </div>
               </div>
             </article>
-            <article class="project-card reveal">
-              <h3>Aplikasi Mobile Streaming CCTV</h3>
-              <p>
-                Pembuatan aplikasi mobile yang digunakan untuk manajemen
-                streaming CCTV secara langsung.
-              </p>
-              <div class="project-tags">
-                <span class="tag">React Vite</span>
-                <span class="tag">Golang</span>
+            <article class="project-card reveal" tabindex="0">
+              <div class="project-card-thumb">
+                <img src="assets/web-cctv.png" alt="Aplikasi Mobile Streaming CCTV" loading="lazy" decoding="async" />
+              </div>
+              <div class="project-card-content">
+                <h3>Aplikasi Mobile Streaming CCTV</h3>
+                <p>
+                  Pembuatan aplikasi mobile yang digunakan untuk manajemen
+                  streaming CCTV secara langsung.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">React Vite</span>
+                  <span class="tag">Golang</span>
+                </div>
               </div>
             </article>
-            <article class="project-card reveal">
-              <h3>Website Badan Usaha Milik Desa (BUMDes)</h3>
-              <p>
-                Proyek pembuatan website dalam lingkup bimbingan belajar untuk
-                Badan Usaha Milik Desa, yang dilengkapi dengan sistem pembayaran
-                dan notifikasi.
-              </p>
-              <div class="project-tags">
-                <span class="tag">Laravel</span>
-                <span class="tag">Midtrans</span>
-                <span class="tag">WA Fonnte</span>
+            <article class="project-card reveal" tabindex="0">
+              <div class="project-card-thumb">
+                <img src="assets/web bumdes.png" alt="Website Badan Usaha Milik Desa (BUMDes)" loading="lazy" decoding="async" />
+              </div>
+              <div class="project-card-content">
+                <h3>Website Badan Usaha Milik Desa (BUMDes)</h3>
+                <p>
+                  Proyek pembuatan website dalam lingkup bimbingan belajar untuk
+                  Badan Usaha Milik Desa, yang dilengkapi dengan sistem pembayaran
+                  dan notifikasi.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">Laravel</span>
+                  <span class="tag">Midtrans</span>
+                  <span class="tag">WA Fonnte</span>
+                </div>
               </div>
             </article>
-            <article class="project-card reveal">
-              <h3>Website Manajemen Alat Kesehatan RSUD Hadji Boejasin</h3>
-              <p>
-                Pengembangan website yang berfungsi untuk manajemen alat
-                kesehatan di rumah sakit.
-              </p>
-              <div class="project-tags">
-                <span class="tag">PHP</span>
-                <span class="tag">CodeIgniter 4</span>
-                <span class="tag">WA Fonnte</span>
+            <article class="project-card reveal" tabindex="0">
+              <div class="project-card-thumb">
+                <img src="assets/web rsud.png" alt="Website Manajemen Alat Kesehatan RSUD Hadji Boejasin" loading="lazy" decoding="async" />
+              </div>
+              <div class="project-card-content">
+                <h3>Website Manajemen Alat Kesehatan RSUD Hadji Boejasin</h3>
+                <p>
+                  Pengembangan website yang berfungsi untuk manajemen alat
+                  kesehatan di rumah sakit.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">PHP</span>
+                  <span class="tag">CodeIgniter 4</span>
+                  <span class="tag">WA Fonnte</span>
+                </div>
               </div>
             </article>
-            <article class="project-card reveal">
-              <h3>Sistem Inventory Gudang PT Jasa Bara Anugerah</h3>
-              <p>
-                Proses pembuatan dan pemeliharaan sistem inventory khusus untuk
-                keperluan pergudangan perusahaan.
-              </p>
-              <div class="project-tags">
-                <span class="tag">Laravel 12</span>
+            <article class="project-card reveal" tabindex="0">
+              <div class="project-card-thumb">
+                <img src="assets/web jba.png" alt="Sistem Inventory Gudang PT Jasa Bara Anugerah" loading="lazy" decoding="async" />
+              </div>
+              <div class="project-card-content">
+                <h3>Sistem Inventory Gudang PT Jasa Bara Anugerah</h3>
+                <p>
+                  Proses pembuatan dan pemeliharaan sistem inventory khusus untuk
+                  keperluan pergudangan perusahaan.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">Laravel 12</span>
+                </div>
               </div>
             </article>
-            <article class="project-card reveal">
-              <h3>Sistem Inventory Gudang PT Raja Ayam Dubai</h3>
-              <p>
-                Pembuatan dan pemeliharaan sistem inventory gudang berbasis web
-                untuk perusahaan pengelola waralaba.
-              </p>
-              <div class="project-tags">
-                <span class="tag">Laravel 12</span>
+            <article class="project-card reveal" tabindex="0">
+              <div class="project-card-thumb">
+                <img src="assets/web jba.png" alt="Sistem Inventory Gudang PT Raja Ayam Dubai" loading="lazy" decoding="async" />
+              </div>
+              <div class="project-card-content">
+                <h3>Sistem Inventory Gudang PT Raja Ayam Dubai</h3>
+                <p>
+                  Pembuatan dan pemeliharaan sistem inventory gudang berbasis web
+                  untuk perusahaan pengelola waralaba.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">Laravel 12</span>
+                </div>
               </div>
             </article>
           </div>
@@ -279,7 +416,7 @@
             </p>
           </div>
           <div class="documentation-grid">
-            <figure class="doc-card reveal">
+            <figure class="doc-card reveal" tabindex="0">
               <div class="doc-media">
                 <img
                   src="assets/web%20jba.png"
@@ -293,7 +430,7 @@
                 <p>Monitoring gudang pusat dengan data stok dan transaksi.</p>
               </figcaption>
             </figure>
-            <figure class="doc-card reveal">
+            <figure class="doc-card reveal" tabindex="0">
               <div class="doc-media">
                 <img
                   src="assets/web%20bumdes.png"
@@ -309,7 +446,7 @@
                 </p>
               </figcaption>
             </figure>
-            <figure class="doc-card reveal">
+            <figure class="doc-card reveal" tabindex="0">
               <div class="doc-media">
                 <img
                   src="assets/web%20rsud.png"
@@ -323,7 +460,7 @@
                 <p>Ringkasan status alat, perawatan, dan aktivitas teknisi.</p>
               </figcaption>
             </figure>
-            <figure class="doc-card reveal">
+            <figure class="doc-card reveal" tabindex="0">
               <div class="doc-media">
                 <img
                   src="assets/web-chicking.png"
@@ -337,7 +474,7 @@
                 <p>Monitoring penjualan, stok kritis, dan status pengiriman.</p>
               </figcaption>
             </figure>
-            <figure class="doc-card reveal">
+            <figure class="doc-card reveal" tabindex="0">
               <div class="doc-media">
                 <img
                   src="assets/web-cctv.png"
@@ -351,7 +488,7 @@
                 <p>Dashboard monitoring, live stream kamera, dan deteksi.</p>
               </figcaption>
             </figure>
-            <figure class="doc-card reveal">
+            <figure class="doc-card reveal" tabindex="0">
               <div class="doc-media">
                 <img
                   src="assets/web-p3m.png"
@@ -367,56 +504,7 @@
             </figure>
           </div>
         </div>
-      </section>
-
-      <section id="skills" class="section alt">
-        <div class="container">
-          <div class="section-header reveal">
-            <h2>Keahlian</h2>
-            <p>
-              Teknologi yang menjadi andalan saya dalam pengembangan produk
-              digital.
-            </p>
-          </div>
-          <div class="skills-grid">
-            <div class="skills-card reveal">
-              <h3>Hard Skills</h3>
-              <div class="tag-list">
-                <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
-                <span class="tag">JS</span>
-                <span class="tag">PHP</span>
-                <span class="tag">Typescript</span>
-                <span class="tag">Golang</span>
-                <span class="tag">Python</span>
-                <span class="tag">React Vite</span>
-              </div>
-            </div>
-            <div class="skills-card reveal">
-              <h3>Framework &amp; Database</h3>
-              <div class="tag-list">
-                <span class="tag">Laravel 12</span>
-                <span class="tag">Codeigniter 4</span>
-                <span class="tag">GoFiber</span>
-                <span class="tag">GIN</span>
-                <span class="tag">Flask</span>
-                <span class="tag">MySQL</span>
-              </div>
-            </div>
-            <div class="skills-card reveal">
-              <h3>Manajemen Server &amp; Integrasi</h3>
-              <div class="tag-list">
-                <span class="tag">Ubuntu</span>
-                <span class="tag">aaPanel</span>
-                <span class="tag">Nginx</span>
-                <span class="tag">SSL</span>
-                <span class="tag">WhatsApp API (Fonnte)</span>
-                <span class="tag">Midtrans</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+</section>
 
       <section id="contact" class="section">
         <div class="container">

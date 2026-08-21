@@ -3,6 +3,30 @@ if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());
 }
 
+const themeToggle = document.getElementById("themeToggle");
+const html = document.documentElement;
+
+function applyTheme(theme) {
+  html.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+}
+
+function initTheme() {
+  const stored = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const initial = stored || (prefersDark ? "dark" : "light");
+  applyTheme(initial);
+}
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const current = html.getAttribute("data-theme");
+    applyTheme(current === "dark" ? "light" : "dark");
+  });
+}
+
+initTheme();
+
 const scrollLinks = document.querySelectorAll("[data-scroll]");
 scrollLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
@@ -13,9 +37,22 @@ scrollLinks.forEach((link) => {
     if (target) {
       event.preventDefault();
       target.scrollIntoView({ behavior: "smooth" });
+      target.focus({ preventScroll: true });
     }
   });
 });
+
+const scrollProgress = document.getElementById("scrollProgress");
+if (scrollProgress) {
+  const updateProgress = () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+    scrollProgress.style.transform = `scaleX(${progress})`;
+  };
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  updateProgress();
+}
 
 const projectSlider = document.querySelector(".project-slider");
 if (projectSlider) {
@@ -75,45 +112,20 @@ if (projectSlider) {
     { passive: false },
   );
 
+  projectSlider.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+      projectSlider.scrollBy({ left: -300, behavior: "smooth" });
+    } else if (e.key === "ArrowRight") {
+      projectSlider.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  });
+
   projectSlider.addEventListener("mouseenter", pauseAuto);
   projectSlider.addEventListener("mouseleave", resumeAuto);
   projectSlider.addEventListener("focusin", pauseAuto);
   projectSlider.addEventListener("focusout", resumeAuto);
   projectSlider.addEventListener("touchstart", pauseAuto, { passive: true });
   projectSlider.addEventListener("touchend", resumeAutoWithDelay);
-
-  if (!prefersReducedMotion.matches) {
-    let direction = 1;
-    let lastTime = null;
-    const speed = 0.035;
-
-    const step = (time) => {
-      const maxScroll = projectSlider.scrollWidth - projectSlider.clientWidth;
-      if (lastTime === null) {
-        lastTime = time;
-        requestAnimationFrame(step);
-        return;
-      }
-
-      if (maxScroll > 0 && !isPaused) {
-        const distance = (time - lastTime) * speed * direction;
-        projectSlider.scrollLeft += distance;
-
-        if (projectSlider.scrollLeft >= maxScroll) {
-          projectSlider.scrollLeft = maxScroll;
-          direction = -1;
-        } else if (projectSlider.scrollLeft <= 0) {
-          projectSlider.scrollLeft = 0;
-          direction = 1;
-        }
-      }
-
-      lastTime = time;
-      requestAnimationFrame(step);
-    };
-
-    requestAnimationFrame(step);
-  }
 }
 
 const revealItems = document.querySelectorAll(".reveal");
