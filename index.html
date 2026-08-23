@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
@@ -26,7 +26,7 @@
           <span class="logo-mark">MSR</span>
           <span class="logo-text">Sahlil Rizki</span>
         </div>
-        <nav class="site-nav" aria-label="Navigasi utama">
+        <nav class="site-nav" id="siteNav" aria-label="Navigasi utama">
           <a href="#about">Tentang</a>
           <a href="#experience">Pengalaman</a>
           <a href="#projects">Proyek</a>
@@ -50,6 +50,18 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
           </svg>
         </button>
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Buka menu navigasi"
+          aria-controls="siteNav"
+          aria-expanded="false"
+          type="button"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </header>
 
@@ -57,73 +69,44 @@
 
     <main id="content">
       <section class="hero section">
+        <div class="hero-bg" aria-hidden="true">
+          <img src="assets/foto-profile.webp" alt="" loading="eager" decoding="async" />
+        </div>
         <div class="container hero-grid">
           <div class="hero-content reveal">
             <p class="eyebrow">Portofolio</p>
             <h1>Muhammad Sahlil Rizki</h1>
             <p class="tagline">
-              IT Programmer | Full-Stack Web & Mobile Developer | Server
-              Administrator
+              IT Programmer · Full-Stack Web & Mobile Developer · Server Administrator
             </p>
             <div class="cta-group">
-              <a class="btn primary" href="#contact" data-scroll="#contact"
-                >Mari diskusikan sistem yang ingin Anda bangun.</a
-              >
-              <!-- <a class="btn ghost" href="mailto:sahlilrizki43@gmail.com"
-                >Hubungi Saya</a
-              > -->
+              <a class="btn primary" href="#projects" data-scroll="#projects">Lihat Proyek Saya</a>
+              <a class="btn ghost" href="#contact" data-scroll="#contact">Hubungi Saya</a>
             </div>
             <div class="social">
-              <a
-                class="icon-link"
-                href="https://github.com/Sahlil"
-                target="_blank"
-                rel="noopener"
-                aria-label="GitHub Sahlil"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    d="M12 2C6.48 2 2 6.58 2 12.24c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48 0-.24-.01-.87-.02-1.7-2.78.62-3.36-1.37-3.36-1.37-.46-1.2-1.12-1.52-1.12-1.52-.92-.65.07-.64.07-.64 1.02.07 1.56 1.07 1.56 1.07.9 1.58 2.37 1.12 2.95.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.35c.85 0 1.7.12 2.5.35 1.9-1.32 2.75-1.05 2.75-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.58 5.06.36.32.69.95.69 1.92 0 1.38-.01 2.5-.01 2.84 0 .26.18.58.69.48A10.22 10.22 0 0 0 22 12.24C22 6.58 17.52 2 12 2z"
-                  />
-                </svg>
+              <a class="icon-link" href="https://github.com/Sahlil" target="_blank" rel="noopener" aria-label="GitHub Sahlil">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2C6.48 2 2 6.58 2 12.24c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48 0-.24-.01-.87-.02-1.7-2.78.62-3.36-1.37-3.36-1.37-.46-1.2-1.12-1.52-1.12-1.52-.92-.65.07-.64.07-.64 1.02.07 1.56 1.07 1.56 1.07.9 1.58 2.37 1.12 2.95.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.35c.85 0 1.7.12 2.5.35 1.9-1.32 2.75-1.05 2.75-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.58 5.06.36.32.69.95.69 1.92 0 1.38-.01 2.5-.01 2.84 0 .26.18.58.69.48A10.22 10.22 0 0 0 22 12.24C22 6.58 17.52 2 12 2z"/></svg>
               </a>
-              <a
-                class="icon-link"
-                href="https://www.linkedin.com/in/muhammad-sahlil-rizki-a27926392/"
-                target="_blank"
-                rel="noopener"
-                aria-label="LinkedIn Sahlil"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0.5 8.5h4V23h-4zM8.5 8.5h3.8v2h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.9c0-1.64-.03-3.75-2.29-3.75-2.29 0-2.64 1.79-2.64 3.63V23h-4z"
-                  />
-                </svg>
+              <a class="icon-link" href="https://www.linkedin.com/in/muhammad-sahlil-rizki-a27926392/" target="_blank" rel="noopener" aria-label="LinkedIn Sahlil">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0.5 8.5h4V23h-4zM8.5 8.5h3.8v2h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V23h-4v-6.9c0-1.64-.03-3.75-2.29-3.75-2.29 0-2.64 1.79-2.64 3.63V23h-4z"/></svg>
               </a>
-              <a
-                class="icon-link"
-                href="https://www.instagram.com/sah_lil__/"
-                target="_blank"
-                rel="noopener"
-                aria-label="Instagram Sahlil"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    d="M7 2h10c2.76 0 5 2.24 5 5v10c0 2.76-2.24 5-5 5H7c-2.76 0-5-2.24-5-5V7c0-2.76 2.24-5 5-5zm0 2C5.9 4 5 4.9 5 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H7zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.75-3.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z"
-                  />
-                </svg>
+              <a class="icon-link" href="https://www.instagram.com/sah_lil__/" target="_blank" rel="noopener" aria-label="Instagram Sahlil">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 2h10c2.76 0 5 2.24 5 5v10c0 2.76-2.24 5-5 5H7c-2.76 0-5-2.24-5-5V7c0-2.76 2.24-5 5-5zm0 2C5.9 4 5 4.9 5 6v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H7zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.75-3.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5z"/></svg>
               </a>
-              <!-- <span class="social-text">github.com/Sahlil</span> -->
             </div>
-          </div>
-          <div class="hero-media reveal">
-            <div class="hero-frame">
-              <img
-                src="assets/foto-profile.webp"
-                alt="Foto Sahlil"
-                loading="lazy"
-                decoding="async"
-              />
+            <div class="hero-stats reveal" style="transition-delay: 0.3s;">
+              <div class="stat-item">
+                <span class="stat-value">7+</span>
+                <span class="stat-label">Proyek Selesai</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">3</span>
+                <span class="stat-label">Pengalaman Kerja</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">15+</span>
+                <span class="stat-label">Teknologi Dikuasai</span>
+              </div>
             </div>
           </div>
         </div>
@@ -153,7 +136,7 @@
         </div>
       </section>
 
-      <section id="skills" class="section alt skills-section">
+<section id="skills" class="section alt skills-section">
         <div class="container">
           <div class="section-header reveal">
             <h2>Keahlian</h2>
@@ -162,76 +145,56 @@
               digital.
             </p>
           </div>
-        </div>
-        <div class="skills-marquee" aria-label="Daftar keahlian">
-            <div class="marquee-track" data-direction="left">
-              <div class="marquee-content">
-              <span class="marquee-tag">HTML</span>
-              <span class="marquee-tag">CSS</span>
-              <span class="marquee-tag">JavaScript</span>
-              <span class="marquee-tag">TypeScript</span>
-              <span class="marquee-tag">PHP</span>
-              <span class="marquee-tag">Golang</span>
-              <span class="marquee-tag">Python</span>
-              <span class="marquee-tag">React</span>
-              <span class="marquee-tag">Node.js</span>
-              <span class="marquee-tag">Docker</span>
-              <span class="marquee-tag">Git</span>
-              <span class="marquee-tag">CI/CD</span>
-              <span class="marquee-tag">REST API</span>
-              <span class="marquee-tag">GraphQL</span>
-                <span class="marquee-tag">WebSocket</span>
-              </div>
-              <div class="marquee-content" aria-hidden="true">
-                <span class="marquee-tag">HTML</span>
-                <span class="marquee-tag">CSS</span>
-                <span class="marquee-tag">JavaScript</span>
-                <span class="marquee-tag">TypeScript</span>
-                <span class="marquee-tag">PHP</span>
-                <span class="marquee-tag">Golang</span>
-                <span class="marquee-tag">Python</span>
-                <span class="marquee-tag">React</span>
-                <span class="marquee-tag">Node.js</span>
-                <span class="marquee-tag">Docker</span>
-                <span class="marquee-tag">Git</span>
-                <span class="marquee-tag">CI/CD</span>
-                <span class="marquee-tag">REST API</span>
-                <span class="marquee-tag">GraphQL</span>
-                <span class="marquee-tag">WebSocket</span>
+          <div class="skills-categories">
+            <div class="skills-category reveal">
+              <h3 class="skills-category-title">Frontend</h3>
+              <div class="skills-tags">
+                <span class="skill-tag">HTML</span>
+                <span class="skill-tag">CSS</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">React</span>
               </div>
             </div>
-            <div class="marquee-track" data-direction="right">
-              <div class="marquee-content">
-              <span class="marquee-tag">Laravel 12</span>
-              <span class="marquee-tag">CodeIgniter 4</span>
-              <span class="marquee-tag">GoFiber</span>
-              <span class="marquee-tag">GIN</span>
-              <span class="marquee-tag">Flask</span>
-              <span class="marquee-tag">MySQL</span>
-              <span class="marquee-tag">PostgreSQL</span>
-              <span class="marquee-tag">Ubuntu</span>
-              <span class="marquee-tag">Nginx</span>
-              <span class="marquee-tag">Midtrans</span>
-              <span class="marquee-tag">WhatsApp API</span>
-              <span class="marquee-tag">SSL/TLS</span>
-                <span class="marquee-tag">aaPanel</span>
-              </div>
-              <div class="marquee-content" aria-hidden="true">
-                <span class="marquee-tag">Laravel 12</span>
-                <span class="marquee-tag">CodeIgniter 4</span>
-                <span class="marquee-tag">GoFiber</span>
-                <span class="marquee-tag">GIN</span>
-                <span class="marquee-tag">Flask</span>
-                <span class="marquee-tag">MySQL</span>
-                <span class="marquee-tag">PostgreSQL</span>
-                <span class="marquee-tag">Ubuntu</span>
-                <span class="marquee-tag">Nginx</span>
-                <span class="marquee-tag">Midtrans</span>
-                <span class="marquee-tag">WhatsApp API</span>
-                <span class="marquee-tag">SSL/TLS</span>
-                <span class="marquee-tag">aaPanel</span>
+            <div class="skills-category reveal">
+              <h3 class="skills-category-title">Backend</h3>
+              <div class="skills-tags">
+                <span class="skill-tag">PHP</span>
+                <span class="skill-tag">Golang</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Node.js</span>
               </div>
             </div>
+            <div class="skills-category reveal">
+              <h3 class="skills-category-title">Database & Infra</h3>
+              <div class="skills-tags">
+                <span class="skill-tag">MySQL</span>
+                <span class="skill-tag">PostgreSQL</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">Ubuntu</span>
+                <span class="skill-tag">Nginx</span>
+                <span class="skill-tag">SSL/TLS</span>
+              </div>
+            </div>
+            <div class="skills-category reveal">
+              <h3 class="skills-category-title">Tools & Lainnya</h3>
+              <div class="skills-tags">
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">CI/CD</span>
+                <span class="skill-tag">REST API</span>
+                <span class="skill-tag">GraphQL</span>
+                <span class="skill-tag">WebSocket</span>
+                <span class="skill-tag">Laravel 12</span>
+                <span class="skill-tag">CodeIgniter 4</span>
+                <span class="skill-tag">GoFiber</span>
+                <span class="skill-tag">GIN</span>
+                <span class="skill-tag">Flask</span>
+                <span class="skill-tag">Midtrans</span>
+                <span class="skill-tag">WhatsApp API</span>
+                <span class="skill-tag">aaPanel</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
