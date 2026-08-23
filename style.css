@@ -1,33 +1,4 @@
 :root {
-  --bg: #fdfbf7;
-  --bg-soft: #f5f0e8;
-  --bg-warm: #ede6db;
-  --ink: #1c1917;
-  --muted: #57534e;
-  --muted-soft: #a8a29e;
-  --accent: #c45a2a;
-  --accent-strong: #9a441e;
-  --accent-soft: #fef3ed;
-  --card: #ffffff;
-  --card-border: #e7e0d8;
-  --card-border-hover: #d6ccc2;
-  --radius: 16px;
-  --radius-sm: 10px;
-  --max-width: 1100px;
-  --transition-fast: 150ms ease;
-  --transition-base: 250ms ease;
-  --transition-slow: 400ms ease;
-  --shadow-soft: 0 2px 8px rgba(28, 25, 23, 0.06), 0 1px 2px rgba(28, 25, 23, 0.04);
-  --shadow-card: 0 4px 20px rgba(28, 25, 23, 0.08), 0 1px 4px rgba(28, 25, 23, 0.04);
-  --shadow-card-hover: 0 12px 32px rgba(28, 25, 23, 0.12), 0 4px 8px rgba(28, 25, 23, 0.06);
-  --shadow-hero: 0 20px 60px rgba(28, 25, 23, 0.15);
-  --focus-ring: 0 0 0 3px rgba(196, 90, 42, 0.35);
-  --font-display: "Fraunces", "Georgia", serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: "JetBrains Mono", "Space Mono", monospace;
-}
-
-[data-theme="dark"] {
   --bg: #1c1917;
   --bg-soft: #292524;
   --bg-warm: #3d3631;
@@ -40,11 +11,20 @@
   --card: #292524;
   --card-border: #44403c;
   --card-border-hover: #57534e;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --max-width: 1100px;
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
   --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
   --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.35), 0 1px 4px rgba(0, 0, 0, 0.2);
   --shadow-card-hover: 0 12px 32px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.25);
   --shadow-hero: 0 20px 60px rgba(0, 0, 0, 0.5);
   --focus-ring: 0 0 0 3px rgba(232, 125, 74, 0.4);
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Space Mono", monospace;
 }
 
 * {
@@ -135,7 +115,7 @@ img, svg {
   100% { transform: translate3d(0, 0, 0); }
 }
 
-[data-theme="dark"] .section.alt::before {
+.section.alt::before {
   opacity: 0.05;
 }
 
@@ -181,13 +161,9 @@ img, svg {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(253, 251, 247, 0.9);
+  background: rgba(28, 25, 23, 0.9);
   backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid var(--card-border);
-}
-
-[data-theme="dark"] .site-header {
-  background: rgba(28, 25, 23, 0.9);
 }
 
 .header-inner {
@@ -197,31 +173,6 @@ img, svg {
   justify-content: space-between;
   gap: 16px;
   padding: 16px 0;
-}
-
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  color: var(--ink);
-  cursor: pointer;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-base), border-color var(--transition-fast);
-}
-
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-soft);
-  border-color: var(--card-border-hover);
-}
-
-.theme-toggle:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
 }
 
 .menu-toggle {
@@ -264,23 +215,6 @@ img, svg {
 .menu-toggle.is-open span:last-child {
   transform: translateY(-7px) rotate(-45deg);
 }
-
-.theme-toggle svg {
-  width: 22px;
-  height: 22px;
-  stroke: currentColor;
-  fill: none;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: opacity var(--transition-base), transform var(--transition-base);
-}
-
-.theme-toggle .icon-sun { display: none; }
-.theme-toggle .icon-moon { display: block; }
-
-[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
-[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
 .brand {
   display: flex;
@@ -368,17 +302,11 @@ img, svg {
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(ellipse 60% 50% at 50% -10%, var(--accent-soft) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% -10%, rgba(232, 125, 74, 0.12) 0%, transparent 60%),
     radial-gradient(ellipse 40% 30% at 80% 100%, var(--bg-warm) 0%, transparent 50%);
   opacity: 1;
   pointer-events: none;
   z-index: 0;
-}
-
-[data-theme="dark"] .hero::before {
-  background: 
-    radial-gradient(ellipse 60% 50% at 50% -10%, rgba(196, 90, 42, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 80% 100%, var(--bg-warm) 0%, transparent 50%);
 }
 
 /* Animated gradient mesh blobs */
@@ -436,35 +364,53 @@ img, svg {
 @keyframes meshFloat {
   0%, 100% {
     transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.18;
+    opacity: 0.1;
   }
   25% {
     transform: translate3d(40px, -30px, 0) scale(1.05);
-    opacity: 0.22;
+    opacity: 0.12;
   }
   50% {
     transform: translate3d(-20px, 40px, 0) scale(0.95);
-    opacity: 0.15;
+    opacity: 0.08;
   }
   75% {
     transform: translate3d(-30px, -20px, 0) scale(1.02);
-    opacity: 0.2;
+    opacity: 0.1;
   }
 }
 
-[data-theme="dark"] .hero-mesh::before {
+.hero-mesh::before {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  left: -100px;
   background: #e87d4a;
   opacity: 0.1;
+  animation-delay: 0s;
+  animation-duration: 22s;
 }
 
-[data-theme="dark"] .hero-mesh::after {
+.hero-mesh::after {
+  width: 300px;
+  height: 300px;
+  bottom: -80px;
+  right: -80px;
   background: #f5a56b;
   opacity: 0.08;
+  animation-delay: -7s;
+  animation-duration: 28s;
 }
 
-[data-theme="dark"] .hero-mesh span {
+.hero-mesh span {
+  width: 250px;
+  height: 250px;
+  top: 40%;
+  left: 30%;
   background: #e87d4a;
   opacity: 0.06;
+  animation-delay: -14s;
+  animation-duration: 34s;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -474,22 +420,28 @@ img, svg {
     animation: none;
     opacity: 0.1;
   }
-  #particleCanvas {
+  #particleCanvas,
+  .section-particles {
     display: none;
   }
 }
 
-/* Interactive particle canvas */
+/* Interactive particle canvas - Hero */
 #particleCanvas {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
-[data-theme="dark"] #particleCanvas {
-  opacity: 0.5;
+/* Section particles - Skills & Experience */
+.section-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
 }
 
 .hero-bg {
@@ -508,16 +460,6 @@ img, svg {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(28, 25, 23, 0.65) 0%,
-    rgba(28, 25, 23, 0.35) 40%,
-    rgba(28, 25, 23, 0.15) 70%,
-    transparent 100%
-  );
-}
-
-[data-theme="dark"] .hero-bg::after {
   background: linear-gradient(
     135deg,
     rgba(0, 0, 0, 0.7) 0%,
@@ -1472,22 +1414,21 @@ img, svg {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
-    transition: none;
-    opacity: 1;
-    transform: none;
-  }
+    .reveal {
+      transition: none;
+      opacity: 1;
+      transform: none;
+    }
 
-  .btn,
-  .icon-link,
-  .theme-toggle,
-  .experience-card,
-  .project-card,
-  .doc-card,
-  .project-card-thumb img,
-  .doc-media img,
-  .skill-tag,
-  .menu-toggle span {
-    transition: none;
+    .btn,
+    .icon-link,
+    .experience-card,
+    .project-card,
+    .doc-card,
+    .project-card-thumb img,
+    .doc-media img,
+    .skill-tag,
+    .menu-toggle span {
+      transition: none;
+    }
   }
-}
