@@ -107,6 +107,42 @@ img, svg {
 
 .section.alt {
   background: var(--bg-soft);
+  position: relative;
+}
+
+.section.alt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  animation: grainShift 20s linear infinite;
+  will-change: transform;
+}
+
+@keyframes grainShift {
+  0% { transform: translate3d(0, 0, 0); }
+  10% { transform: translate3d(2px, 1px, 0); }
+  20% { transform: translate3d(-1px, -2px, 0); }
+  30% { transform: translate3d(1px, 2px, 0); }
+  40% { transform: translate3d(-2px, 1px, 0); }
+  50% { transform: translate3d(2px, -1px, 0); }
+  60% { transform: translate3d(-1px, 2px, 0); }
+  70% { transform: translate3d(1px, -2px, 0); }
+  80% { transform: translate3d(-2px, -1px, 0); }
+  90% { transform: translate3d(2px, 2px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+[data-theme="dark"] .section.alt::before {
+  opacity: 0.05;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section.alt::before {
+    animation: none;
+  }
 }
 
 .skip-link {
@@ -137,6 +173,7 @@ img, svg {
   transform: scaleX(0);
   z-index: 1000;
   pointer-events: none;
+  transition: background 600ms ease;
 }
 
 .site-header {
@@ -343,6 +380,101 @@ img, svg {
     radial-gradient(ellipse 40% 30% at 80% 100%, var(--bg-warm) 0%, transparent 50%);
 }
 
+/* Animated gradient mesh blobs */
+.hero-mesh {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-mesh::before,
+.hero-mesh::after,
+.hero-mesh span {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.18;
+  animation: meshFloat 20s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.hero-mesh::before {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  left: -100px;
+  background: var(--accent);
+  animation-delay: 0s;
+  animation-duration: 22s;
+}
+
+.hero-mesh::after {
+  width: 300px;
+  height: 300px;
+  bottom: -80px;
+  right: -80px;
+  background: var(--accent-strong);
+  animation-delay: -7s;
+  animation-duration: 28s;
+}
+
+.hero-mesh span {
+  width: 250px;
+  height: 250px;
+  top: 40%;
+  left: 30%;
+  background: var(--accent);
+  opacity: 0.12;
+  animation-delay: -14s;
+  animation-duration: 34s;
+}
+
+@keyframes meshFloat {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.18;
+  }
+  25% {
+    transform: translate3d(40px, -30px, 0) scale(1.05);
+    opacity: 0.22;
+  }
+  50% {
+    transform: translate3d(-20px, 40px, 0) scale(0.95);
+    opacity: 0.15;
+  }
+  75% {
+    transform: translate3d(-30px, -20px, 0) scale(1.02);
+    opacity: 0.2;
+  }
+}
+
+[data-theme="dark"] .hero-mesh::before {
+  background: #e87d4a;
+  opacity: 0.1;
+}
+
+[data-theme="dark"] .hero-mesh::after {
+  background: #f5a56b;
+  opacity: 0.08;
+}
+
+[data-theme="dark"] .hero-mesh span {
+  background: #e87d4a;
+  opacity: 0.06;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-mesh::before,
+  .hero-mesh::after,
+  .hero-mesh span {
+    animation: none;
+    opacity: 0.1;
+  }
+}
+
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -433,6 +565,40 @@ img, svg {
   line-height: 1.6;
   font-weight: 400;
   max-width: 50ch;
+}
+
+.tagline-rotator {
+  display: inline-block;
+  position: relative;
+  min-height: 1.6em;
+  vertical-align: bottom;
+}
+
+.tagline-rotator span {
+  display: inline-block;
+  background: linear-gradient(135deg, #fff 0%, #ffe8d6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+  transition: opacity 400ms ease, transform 400ms ease;
+  will-change: opacity, transform;
+}
+
+.tagline-rotator.is-out {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.tagline-rotator.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tagline-rotator span {
+    transition: none;
+  }
 }
 
 .cta-group {
@@ -722,6 +888,7 @@ img, svg {
   font-size: 0.85rem;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
   cursor: default;
+  position: relative;
 }
 
 .skill-tag:hover {
@@ -732,6 +899,7 @@ img, svg {
   color: var(--accent-strong);
 }
 
+/* Accent dot */
 .skill-tag::before {
   content: "";
   width: 7px;
@@ -739,6 +907,61 @@ img, svg {
   border-radius: 50%;
   background: var(--accent);
   opacity: 0.7;
+  flex-shrink: 0;
+}
+
+/* Tooltip for skill tags with data-desc */
+.skill-tag[data-desc]::after {
+  content: attr(data-desc);
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease, visibility 200ms ease;
+  z-index: 100;
+  box-shadow: var(--shadow-card);
+  max-width: 280px;
+  text-align: center;
+}
+
+/* Tooltip arrow */
+.skill-tag[data-desc]::before {
+  /* Accent dot is shown by default - we need a different approach for arrow */
+}
+
+/* Create arrow using the tag's ::after pseudo but we need a wrapper. 
+   For now, tooltip works without arrow. Arrow can be added via JS if needed. */
+
+.skill-tag[data-desc]:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-tag[data-desc]::after {
+    transition: none;
+  }
+}
+
+/* Mobile tooltip visible state */
+@media (max-width: 720px) {
+  .skill-tag[data-desc].tooltip-visible::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 .project-grid {

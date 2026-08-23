@@ -72,12 +72,13 @@
         <div class="hero-bg" aria-hidden="true">
           <img src="assets/foto-profile.webp" alt="" loading="eager" decoding="async" />
         </div>
+        <div class="hero-mesh" aria-hidden="true"><span></span></div>
         <div class="container hero-grid">
           <div class="hero-content reveal">
             <p class="eyebrow">Portofolio</p>
             <h1>Muhammad Sahlil Rizki</h1>
             <p class="tagline">
-              IT Programmer · Full-Stack Web & Mobile Developer · Server Administrator
+              <span class="tagline-rotator" aria-live="polite" data-roles='["Full-Stack Developer", "Server Administrator", "Mobile Developer", "API Designer", "System Architect"]'></span>
             </p>
             <div class="cta-group">
               <a class="btn primary" href="#projects" data-scroll="#projects">Lihat Proyek Saya</a>
@@ -96,15 +97,15 @@
             </div>
             <div class="hero-stats reveal" style="transition-delay: 0.3s;">
               <div class="stat-item">
-                <span class="stat-value">7+</span>
+                <span class="stat-value" data-target="7" data-suffix="+">0</span>
                 <span class="stat-label">Proyek Selesai</span>
               </div>
               <div class="stat-item">
-                <span class="stat-value">3</span>
+                <span class="stat-value" data-target="3">0</span>
                 <span class="stat-label">Pengalaman Kerja</span>
               </div>
               <div class="stat-item">
-                <span class="stat-value">15+</span>
+                <span class="stat-value" data-target="15" data-suffix="+">0</span>
                 <span class="stat-label">Teknologi Dikuasai</span>
               </div>
             </div>
@@ -149,49 +150,49 @@
             <div class="skills-category reveal">
               <h3 class="skills-category-title">Frontend</h3>
               <div class="skills-tags">
-                <span class="skill-tag">HTML</span>
-                <span class="skill-tag">CSS</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">TypeScript</span>
-                <span class="skill-tag">React</span>
+                <span class="skill-tag" data-desc="Semantic markup & accessibility">HTML</span>
+                <span class="skill-tag" data-desc="Modern layout, animations, variables">CSS</span>
+                <span class="skill-tag" data-desc="ES6+, DOM, async patterns">JavaScript</span>
+                <span class="skill-tag" data-desc="Type safety, interfaces, generics">TypeScript</span>
+                <span class="skill-tag" data-desc="Hooks, context, performance">React</span>
               </div>
             </div>
             <div class="skills-category reveal">
               <h3 class="skills-category-title">Backend</h3>
               <div class="skills-tags">
-                <span class="skill-tag">PHP</span>
-                <span class="skill-tag">Golang</span>
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag" data-desc="Laravel, CI4, native PHP 8+">PHP</span>
+                <span class="skill-tag" data-desc="Goroutines, stdlib, microservices">Golang</span>
+                <span class="skill-tag" data-desc="FastAPI, Flask, scripting, data">Python</span>
+                <span class="skill-tag" data-desc="Express, NestJS, realtime, workers">Node.js</span>
               </div>
             </div>
             <div class="skills-category reveal">
               <h3 class="skills-category-title">Database & Infra</h3>
               <div class="skills-tags">
-                <span class="skill-tag">MySQL</span>
-                <span class="skill-tag">PostgreSQL</span>
-                <span class="skill-tag">Docker</span>
-                <span class="skill-tag">Ubuntu</span>
-                <span class="skill-tag">Nginx</span>
-                <span class="skill-tag">SSL/TLS</span>
+                <span class="skill-tag" data-desc="Relational, indexing, optimization">MySQL</span>
+                <span class="skill-tag" data-desc="Advanced queries, JSON, scaling">PostgreSQL</span>
+                <span class="skill-tag" data-desc="Containers, compose, multi-stage builds">Docker</span>
+                <span class="skill-tag" data-desc="Server hardening, automation, LTS">Ubuntu</span>
+                <span class="skill-tag" data-desc="Reverse proxy, load balancing, SSL">Nginx</span>
+                <span class="skill-tag" data-desc="Certificates, HSTS, TLS 1.3">SSL/TLS</span>
               </div>
             </div>
             <div class="skills-category reveal">
               <h3 class="skills-category-title">Tools & Lainnya</h3>
               <div class="skills-tags">
-                <span class="skill-tag">Git</span>
-                <span class="skill-tag">CI/CD</span>
-                <span class="skill-tag">REST API</span>
-                <span class="skill-tag">GraphQL</span>
-                <span class="skill-tag">WebSocket</span>
-                <span class="skill-tag">Laravel 12</span>
-                <span class="skill-tag">CodeIgniter 4</span>
-                <span class="skill-tag">GoFiber</span>
-                <span class="skill-tag">GIN</span>
-                <span class="skill-tag">Flask</span>
-                <span class="skill-tag">Midtrans</span>
-                <span class="skill-tag">WhatsApp API</span>
-                <span class="skill-tag">aaPanel</span>
+                <span class="skill-tag" data-desc="Version control, branching, rebasing">Git</span>
+                <span class="skill-tag" data-desc="GitHub Actions, pipelines, deploy">CI/CD</span>
+                <span class="skill-tag" data-desc="RESTful design, OpenAPI specs">REST API</span>
+                <span class="skill-tag" data-desc="Schema, resolvers, subscriptions">GraphQL</span>
+                <span class="skill-tag" data-desc="Real-time bidirectional comms">WebSocket</span>
+                <span class="skill-tag" data-desc="Eloquent, queues, broadcasting">Laravel 12</span>
+                <span class="skill-tag" data-desc="Lightweight MVC, HMVC support">CodeIgniter 4</span>
+                <span class="skill-tag" data-desc="Fast HTTP, middleware, DI">GoFiber</span>
+                <span class="skill-tag" data-desc="High-perf web framework, DI">GIN</span>
+                <span class="skill-tag" data-desc="Micro framework, extensible">Flask</span>
+                <span class="skill-tag" data-desc="Payment gateway, snap, redirect">Midtrans</span>
+                <span class="skill-tag" data-desc="WA Business API, templates, webhook">WhatsApp API</span>
+                <span class="skill-tag" data-desc="Server panel, LAMP/LEMP, DNS">aaPanel</span>
               </div>
             </div>
           </div>

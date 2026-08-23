@@ -83,12 +83,32 @@ scrollLinks.forEach((link) => {
 
 const scrollProgress = document.getElementById("scrollProgress");
 if (scrollProgress) {
+  const sections = document.querySelectorAll("section.section");
+  
   const updateProgress = () => {
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const progress = docHeight > 0 ? scrollTop / docHeight : 0;
     scrollProgress.style.transform = `scaleX(${progress})`;
+    
+    // Color shift by section
+    const viewportMid = window.innerHeight * 0.4;
+    let activeSection = null;
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= viewportMid && rect.bottom >= viewportMid) {
+        activeSection = section;
+      }
+    });
+    
+    if (activeSection) {
+      const isAlt = activeSection.classList.contains("alt");
+      scrollProgress.style.background = isAlt 
+        ? "var(--accent-strong)" 
+        : "var(--accent)";
+    }
   };
+  
   window.addEventListener("scroll", updateProgress, { passive: true });
   updateProgress();
 }
@@ -168,12 +188,119 @@ if (projectSlider) {
 }
 
 const revealItems = document.querySelectorAll(".reveal");
+
+// Skill tag tooltip for mobile (tap to show)
+const skillTags = document.querySelectorAll(".skill-tag[data-desc]");
+if (skillTags.length > 0) {
+  let activeTooltip = null;
+  
+  skillTags.forEach((tag) => {
+    tag.addEventListener("click", (e) => {
+      // On mobile, toggle tooltip on click
+      if (window.innerWidth <= 720) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (activeTooltip && activeTooltip !== tag) {
+          activeTooltip.classList.remove("tooltip-visible");
+        }
+        
+        tag.classList.toggle("tooltip-visible");
+        activeTooltip = tag.classList.contains("tooltip-visible") ? tag : null;
+      }
+    });
+  });
+  
+  // Close tooltip on outside click
+  document.addEventListener("click", (e) => {
+    if (activeTooltip && !activeTooltip.contains(e.target)) {
+      activeTooltip.classList.remove("tooltip-visible");
+      activeTooltip = null;
+    }
+  });
+}
+const taglineRotator = document.querySelector(".tagline-rotator");
+if (taglineRotator) {
+  let roles;
+  try {
+    roles = JSON.parse(taglineRotator.getAttribute("data-roles") || "[]");
+  } catch {
+    roles = [];
+  }
+  
+  if (roles.length > 0) {
+    let currentRoleIdx = 0;
+    let isAnimating = false;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    
+    function renderRole(idx) {
+      taglineRotator.textContent = roles[idx];
+      if (!prefersReducedMotion) {
+        taglineRotator.classList.remove("is-out");
+        taglineRotator.classList.add("is-in");
+      }
+    }
+    
+    renderRole(currentRoleIdx);
+    
+    if (roles.length > 1 && !prefersReducedMotion) {
+      setInterval(() => {
+        if (isAnimating) return;
+        isAnimating = true;
+        taglineRotator.classList.remove("is-in");
+        taglineRotator.classList.add("is-out");
+        
+        setTimeout(() => {
+          currentRoleIdx = (currentRoleIdx + 1) % roles.length;
+          renderRole(currentRoleIdx);
+          isAnimating = false;
+        }, 400);
+      }, 3000);
+    }
+  }
+}
+
+function animateCounter(el) {
+  const target = parseInt(el.getAttribute("data-target") || el.textContent, 10);
+  if (isNaN(target)) return;
+  
+  let count = 0;
+  const duration = 2000; // 2 seconds
+  const startTime = performance.now();
+  const suffix = el.getAttribute("data-suffix") || "";
+  
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    
+    // Ease out expo
+    const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    
+    const currentCount = Math.floor(easeProgress * target);
+    el.textContent = currentCount + suffix;
+    
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.textContent = target + suffix;
+    }
+  }
+  
+  requestAnimationFrame(update);
+}
+
 if ("IntersectionObserver" in window) {
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
+          
+          // Trigger counter animation if it's a stat card
+          if (entry.target.classList.contains("hero-stats")) {
+            entry.target.querySelectorAll(".stat-value").forEach(animateCounter);
+          }
+          
           obs.unobserve(entry.target);
         }
       });
