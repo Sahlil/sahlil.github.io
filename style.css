@@ -88,6 +88,34 @@ img, svg {
 .section.alt {
   background: var(--bg-soft);
   position: relative;
+  overflow: hidden;
+}
+
+.spotlight-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+.spotlight-canvas.is-active {
+  opacity: 1;
+}
+
+.section.alt .container {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-canvas {
+    display: none;
+  }
 }
 
 .section.alt::before {

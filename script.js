@@ -269,3 +269,76 @@ const globalCanvas = document.getElementById("globalParticles");
 if (globalCanvas && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   new ParticleSystem(globalCanvas);
 }
+
+// Section Spotlight (Mouse Glow) for .section.alt
+class SectionSpotlight {
+  constructor(canvasId, sectionId) {
+    this.canvas = document.getElementById(canvasId);
+    this.section = document.getElementById(sectionId);
+    if (!this.canvas || !this.section) return;
+    this.ctx = this.canvas.getContext("2d");
+    this.mouseX = -1000;
+    this.mouseY = -1000;
+    this.target = 0;
+    this.opacity = 0;
+    this.radius = 400;
+    this.fadeSpeed = 0.08;
+    this.active = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    this.bind();
+    this.resize();
+    this.tick();
+  }
+
+  bind() {
+    this.section.addEventListener("mousemove", (e) => {
+      const r = this.section.getBoundingClientRect();
+      this.mouseX = e.clientX - r.left;
+      this.mouseY = e.clientY - r.top;
+      this.target = 1;
+      this.canvas.classList.add("is-active");
+    });
+    this.section.addEventListener("mouseleave", () => {
+      this.target = 0;
+      this.canvas.classList.remove("is-active");
+    });
+    window.addEventListener("resize", () => this.resize());
+  }
+
+  resize() {
+    if (!this.active) return;
+    const dpr = window.devicePixelRatio || 1;
+    const w = this.section.offsetWidth;
+    const h = this.section.offsetHeight;
+    this.canvas.width = w * dpr;
+    this.canvas.height = h * dpr;
+    this.canvas.style.width = w + "px";
+    this.canvas.style.height = h + "px";
+    this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+    this.ctx.scale(dpr, dpr);
+  }
+
+  tick() {
+    if (!this.active) return;
+    this.opacity += (this.target - this.opacity) * this.fadeSpeed;
+    this.draw();
+    requestAnimationFrame(() => this.tick());
+  }
+
+  draw() {
+    const w = this.canvas.width / (window.devicePixelRatio || 1);
+    const h = this.canvas.height / (window.devicePixelRatio || 1);
+    this.ctx.clearRect(0, 0, w, h);
+    if (this.opacity < 0.01) return;
+
+    const g = this.ctx.createRadialGradient(this.mouseX, this.mouseY, 0, this.mouseX, this.mouseY, this.radius);
+    g.addColorStop(0, `rgba(232, 125, 74, ${0.18 * this.opacity})`);
+    g.addColorStop(0.4, `rgba(232, 125, 74, ${0.07 * this.opacity})`);
+    g.addColorStop(1, "rgba(232, 125, 74, 0)");
+    this.ctx.fillStyle = g;
+    this.ctx.fillRect(0, 0, w, h);
+  }
+}
+
+new SectionSpotlight("skills-canvas", "skills");
+new SectionSpotlight("experience-canvas", "experience");
+new SectionSpotlight("docs-canvas", "documentation");
