@@ -421,12 +421,13 @@ img, svg {
     opacity: 0.1;
   }
   #particleCanvas,
-  .section-particles {
+  .section-particles,
+  #globalParticles {
     display: none;
   }
 }
 
-/* Interactive particle canvas - Hero */
+/* Interactive particle canvas - Hero (legacy, kept for compat) */
 #particleCanvas {
   position: absolute;
   inset: 0;
@@ -435,13 +436,17 @@ img, svg {
   opacity: 0.5;
 }
 
-/* Section particles - Skills & Experience */
-.section-particles {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+/* Global particle canvas - full viewport */
+#globalParticles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
   pointer-events: none;
-  opacity: 0.35;
+  opacity: 0.4;
+  display: block;
 }
 
 .hero-bg {
