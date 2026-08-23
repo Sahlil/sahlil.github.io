@@ -300,7 +300,7 @@ class CinematicDust {
     this.ctx = this.canvas.getContext("2d");
     this.hero = this.canvas.parentElement;
     this.particles = [];
-    this.count = 90;
+    this.count = 180;
     this.active = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     this.W = 0;
     this.H = 0;
