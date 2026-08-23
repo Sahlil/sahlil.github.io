@@ -474,6 +474,22 @@ img, svg {
     animation: none;
     opacity: 0.1;
   }
+  #particleCanvas {
+    display: none;
+  }
+}
+
+/* Interactive particle canvas */
+#particleCanvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+[data-theme="dark"] #particleCanvas {
+  opacity: 0.5;
 }
 
 .hero-bg {
