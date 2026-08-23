@@ -219,6 +219,8 @@ if (skillTags.length > 0) {
     }
   });
 }
+
+// Typewriter tagline
 const taglineRotator = document.querySelector(".tagline-rotator");
 if (taglineRotator) {
   let roles;
@@ -230,33 +232,66 @@ if (taglineRotator) {
   
   if (roles.length > 0) {
     let currentRoleIdx = 0;
-    let isAnimating = false;
+    let charIdx = 0;
+    let isDeleting = false;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     
-    function renderRole(idx) {
-      taglineRotator.textContent = roles[idx];
-      if (!prefersReducedMotion) {
-        taglineRotator.classList.remove("is-out");
-        taglineRotator.classList.add("is-in");
+    const TYPE_SPEED = 60;      // ms per char when typing
+    const DELETE_SPEED = 35;    // ms per char when deleting
+    const HOLD_TIME = 1800;     // ms to hold full text
+    const PAUSE_BETWEEN = 300;  // ms pause before next role
+    
+    // Screen reader text (updated once per role)
+    let srText = taglineRotator.querySelector(".sr-only");
+    if (!srText) {
+      srText = document.createElement("span");
+      srText.className = "sr-only";
+      taglineRotator.parentNode.insertBefore(srText, taglineRotator.nextSibling);
+    }
+    
+    function typeLoop() {
+      const currentRole = roles[currentRoleIdx];
+      
+      if (prefersReducedMotion) {
+        // Reduced motion: instant swap, no animation
+        taglineRotator.textContent = currentRole;
+        srText.textContent = currentRole;
+        setTimeout(() => {
+          currentRoleIdx = (currentRoleIdx + 1) % roles.length;
+          typeLoop();
+        }, HOLD_TIME);
+        return;
+      }
+      
+      if (!isDeleting) {
+        // Typing forward
+        if (charIdx < currentRole.length) {
+          taglineRotator.textContent = currentRole.slice(0, charIdx + 1);
+          charIdx++;
+          setTimeout(typeLoop, TYPE_SPEED);
+        } else {
+          // Finished typing - hold
+          srText.textContent = currentRole;
+          isDeleting = true;
+          setTimeout(typeLoop, HOLD_TIME);
+        }
+      } else {
+        // Deleting
+        if (charIdx > 0) {
+          taglineRotator.textContent = currentRole.slice(0, charIdx - 1);
+          charIdx--;
+          setTimeout(typeLoop, DELETE_SPEED);
+        } else {
+          // Finished deleting - move to next role
+          isDeleting = false;
+          currentRoleIdx = (currentRoleIdx + 1) % roles.length;
+          setTimeout(typeLoop, PAUSE_BETWEEN);
+        }
       }
     }
     
-    renderRole(currentRoleIdx);
-    
-    if (roles.length > 1 && !prefersReducedMotion) {
-      setInterval(() => {
-        if (isAnimating) return;
-        isAnimating = true;
-        taglineRotator.classList.remove("is-in");
-        taglineRotator.classList.add("is-out");
-        
-        setTimeout(() => {
-          currentRoleIdx = (currentRoleIdx + 1) % roles.length;
-          renderRole(currentRoleIdx);
-          isAnimating = false;
-        }, 400);
-      }, 3000);
-    }
+    // Start the loop
+    typeLoop();
   }
 }
 

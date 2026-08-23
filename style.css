@@ -167,7 +167,8 @@ img, svg {
   position: fixed;
   top: 0;
   left: 0;
-  height: 3px;
+  width: 100%;
+  height: 4px;
   background: var(--accent);
   transform-origin: left;
   transform: scaleX(0);
@@ -572,32 +573,48 @@ img, svg {
   position: relative;
   min-height: 1.6em;
   vertical-align: bottom;
-}
-
-.tagline-rotator span {
-  display: inline-block;
+  font-weight: 600;
   background: linear-gradient(135deg, #fff 0%, #ffe8d6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-weight: 600;
-  transition: opacity 400ms ease, transform 400ms ease;
-  will-change: opacity, transform;
 }
 
-.tagline-rotator.is-out {
-  opacity: 0;
-  transform: translateY(10px);
+/* Typewriter cursor */
+.tagline-rotator::after {
+  content: "▍";
+  position: absolute;
+  right: -4px;
+  top: 0;
+  color: var(--accent);
+  font-weight: 400;
+  animation: typewriterBlink 1s step-end infinite;
+  line-height: 1;
+  pointer-events: none;
 }
 
-.tagline-rotator.is-in {
-  opacity: 1;
-  transform: translateY(0);
+@keyframes typewriterBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tagline-rotator span {
-    transition: none;
+  .tagline-rotator::after {
+    animation: none;
+    opacity: 0;
   }
 }
 
