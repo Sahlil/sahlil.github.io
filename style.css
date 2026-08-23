@@ -91,29 +91,21 @@ img, svg {
   overflow: hidden;
 }
 
-.spotlight-canvas {
-  position: absolute;
+#global-spotlight {
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 500ms ease;
-}
-
-.spotlight-canvas.is-active {
-  opacity: 1;
-}
-
-.section.alt .container {
-  position: relative;
   z-index: 1;
+  background: radial-gradient(600px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), rgba(232, 125, 74, 0.08), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .spotlight-canvas {
+  #global-spotlight {
     display: none;
   }
 }
