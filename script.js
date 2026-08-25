@@ -1,3 +1,11 @@
+const hidePreloader = () => {
+  if (document.body.classList.contains("loaded")) return;
+  document.body.classList.add("loaded");
+  setTimeout(() => document.getElementById("preloader")?.remove(), 500);
+};
+window.addEventListener("load", hidePreloader);
+setTimeout(hidePreloader, 3000);
+
 const yearEl = document.getElementById("year");
 if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());
@@ -80,10 +88,64 @@ if ("IntersectionObserver" in window) {
   revealItems.forEach(el => obs.observe(el));
 } else { revealItems.forEach(el => el.classList.add("is-visible")); }
 
+function typeSectionTexts(section) {
+  const els = section.querySelectorAll(".section-header h2, .section-header p, .about-grid > p");
+  els.forEach(el => {
+    if (el.dataset.typed) return;
+    el.dataset.typed = "1";
+    const text = el.textContent;
+    el.setAttribute("aria-label", text);
+    // ponytail: aria-label di elemen generik diabaikan sebagian screen reader; upgrade -> span sr-only
+    el.textContent = "";
+    el.classList.add("is-typing");
+    let i = 0;
+    const timer = setInterval(() => {
+      el.textContent = text.slice(0, ++i);
+      if (i >= text.length) { clearInterval(timer); el.classList.remove("is-typing"); }
+    }, 28);
+  });
+}
+
+const typeSections = document.querySelectorAll("#about, #skills, #experience, #projects, #documentation, #contact");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (!reduceMotion && "IntersectionObserver" in window && typeSections.length) {
+  const typeObs = new IntersectionObserver((entries, o) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) { typeSectionTexts(en.target); o.unobserve(en.target); }
+    });
+  }, { threshold: 0.15 });
+  typeSections.forEach(sec => typeObs.observe(sec));
+}
+
 document.querySelectorAll(".skill-tag[data-desc]").forEach(tag => {
   tag.addEventListener("click", e => { if (window.innerWidth <= 720) { e.preventDefault(); e.stopPropagation(); document.querySelectorAll(".skill-tag.tooltip-visible").forEach(t => t.classList.remove("tooltip-visible")); tag.classList.toggle("tooltip-visible"); } });
 });
 document.addEventListener("click", e => { document.querySelectorAll(".skill-tag.tooltip-visible").forEach(t => { if (!t.contains(e.target)) t.classList.remove("tooltip-visible"); }); });
+
+const SKILL_SLUGS = {
+  "html": "html5", "css": "css3", "javascript": "javascript", "typescript": "typescript",
+  "react.js": "react", "vue.js": "vuedotjs", "react native": "reactnative", "expo": "expo",
+  "php": "php", "golang": "go", "python": "python", "node.js": "nodedotjs",
+  "mysql": "mysql", "postgresql": "postgresql", "sqlite": "sqlite",
+  "docker": "docker", "ubuntu": "ubuntu", "nginx": "nginx", "graphql": "graphql",
+  "git": "git", "laravel": "laravel", "codeigniter": "codeigniter",
+  "gofiber": "gofiber", "gin": "gin", "flask": "flask", "whatsapp api": "whatsapp"
+};
+document.querySelectorAll(".skill-tag[data-desc]").forEach(tag => {
+  const slug = SKILL_SLUGS[tag.textContent.trim().toLowerCase()];
+  if (!slug) return;
+  const inject = () => {
+    if (tag.querySelector(".skill-logo-pop")) return;
+    const img = document.createElement("img");
+    img.className = "skill-logo-pop";
+    img.alt = "";
+    img.src = `https://cdn.simpleicons.org/${slug}/e87d4a`;
+    img.onerror = () => img.remove();
+    tag.appendChild(img);
+  };
+  tag.addEventListener("pointerenter", inject);
+  tag.addEventListener("click", inject);
+});
 
 const tagline = document.querySelector(".tagline-rotator");
 if (tagline) {
