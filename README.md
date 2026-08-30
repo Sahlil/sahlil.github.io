@@ -38,7 +38,6 @@ Seorang **Praktisi IT** yang berfokus pada **Pengembangan Web & Mobile** serta *
 ### GitHub Stats
 !(https://github-readme-stats.vercel.app/api?username=Sahlil&show_icons=true&theme=dark)
 !(https://github-readme-stats.vercel.app/api/top-langs/?username=Sahlil&layout=compact&theme=dark)
-
 ---
 
 ### Connect with Me
