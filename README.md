@@ -30,7 +30,7 @@ Seorang **Praktisi IT** yang berfokus pada **Pengembangan Web & Mobile** serta *
 
 ### Education & Professional Background
 
-- **Diploma in Teknologi Informasi**, Politeknik Negeri Tanah Laut (IPK: 3.85/4.00)[cite: 31, 32].
+- **Diploma in Teknologi Informasi**, Politeknik Negeri Tanah Laut (IPK: 3.88/4.00)[cite: 31, 32].
 - **Keahlian Tambahan:** Troubleshooting bug pada source code, perbaikan jaringan dasar, serta pengolahan data teknis menggunakan Microsoft Excel[cite: 52, 53].
 
 ---
