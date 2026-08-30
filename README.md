@@ -44,4 +44,4 @@ Seorang **Praktisi IT** yang berfokus pada **Pengembangan Web & Mobile** serta *
 ### Connect with Me
 - **Email:** sahlilrizki43@gmail.com [cite: 2]
 - **LinkedIn:** [Muhammad Sahlil Rizki](https://www.linkedin.com/in/muhammad-sahlil-rizki)
-- **WhatsApp:** 085796690915 [cite: 2]
+
