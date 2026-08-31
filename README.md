@@ -25,7 +25,6 @@ Seorang **Praktisi IT** yang berfokus pada **Pengembangan Web & Mobile** serta *
     * Sistem Manajemen Produksi **Go Chicken Go** dengan integrasi WhatsApp API[cite: 11].
 * **Server Administration**
     * Mengelola deployment manual pada server **Ubuntu**, konfigurasi Virtual Host, serta manajemen keamanan melalui SSL dan pengaturan Firewall[cite: 54, 55].
-
 ---
 
 ### Education & Professional Background
