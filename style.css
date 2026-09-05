@@ -803,16 +803,7 @@ img, svg {
   box-shadow: var(--focus-ring);
 }
 
-.hero-media {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .hero-media {
-    display: block;
-  }
-}
-
+/* hero-media is styled in the hero section above */
 .hero-stats {
   display: flex;
   flex-wrap: wrap;
