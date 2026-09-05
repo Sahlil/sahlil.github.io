@@ -1601,7 +1601,7 @@ img, svg {
   align-items: center;
   justify-content: center;
   gap: 1.5rem;
-  transition: opacity var(--transition-slow), visibility var(--transition-slow);
+  transition: opacity 200ms ease, visibility 200ms ease;
 }
 
 .preloader-logo {
