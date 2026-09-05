@@ -380,6 +380,226 @@ class ParticleSystem {
   stop() { this.active = false; cancelAnimationFrame(this.raf); }
 }
 
+// Mouse Trail Particles - Hero only
+// Efek partikel mengikuti kursor (attract + trail spawn) dengan glow blend.
+// Insipirasi: antigravity.google
+class MouseTrailParticles {
+  constructor(canvasId, heroSelector) {
+    this.canvas = document.getElementById(canvasId);
+    if (!this.canvas) return;
+    this.hero = document.querySelector(heroSelector);
+    if (!this.hero) return;
+    this.ctx = this.canvas.getContext("2d");
+    this.particles = [];
+    this.mouse = { x: null, y: null, px: null, py: null, moving: false };
+    this.W = 0;
+    this.H = 0;
+    this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+    this.active = false;
+    this.raf = null;
+    this.visible = true;
+
+    this.isMobile = window.innerWidth <= 768;
+
+    this.config = {
+      maxParticles: 600,
+      spawnRate: this.isMobile ? 2 : 3,
+      minSize: 1,
+      maxSize: 2.5,
+      fadeSpeed: 0.012,
+      attractRadius: 150,
+      attractForce: 0.08,
+      drift: 0.02,
+      friction: 0.96,
+      colors: [
+        [232, 125, 74],   // #e87d4a
+        [245, 165, 107],  // #f5a56b
+        [255, 179, 107],  // #ffb36b
+        [255, 217, 168]   // #ffd9a8
+      ]
+    };
+
+    this.resize = this.resize.bind(this);
+    this.onMouseMove = this.onMouseMove.bind(this);
+    this.onTouchMove = this.onTouchMove.bind(this);
+    this.onTouchEnd = this.onTouchEnd.bind(this);
+    this.loop = this.loop.bind(this);
+
+    this.init();
+  }
+
+  init() {
+    this.resize();
+    this.bind();
+    this.setupVisibility();
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) this.start();
+    window.addEventListener("resize", this.resize);
+  }
+
+  setupVisibility() {
+    if (!("IntersectionObserver" in window)) return;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        this.visible = en.isIntersecting;
+        if (this.visible && !this.active) this.start();
+        else if (!this.visible && this.active) this.stop();
+      });
+    }, { threshold: 0.05 });
+    obs.observe(this.hero);
+  }
+
+  resize() {
+    const w = this.hero.offsetWidth;
+    const h = this.hero.offsetHeight;
+    this.W = w;
+    this.H = h;
+    this.canvas.width = w * this.dpr;
+    this.canvas.height = h * this.dpr;
+    this.canvas.style.width = w + "px";
+    this.canvas.style.height = h + "px";
+    this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+    this.ctx.scale(this.dpr, this.dpr);
+  }
+
+  bind() {
+    this.hero.addEventListener("mousemove", this.onMouseMove, { passive: true });
+    this.hero.addEventListener("touchmove", this.onTouchMove, { passive: true });
+    this.hero.addEventListener("touchend", this.onTouchEnd, { passive: true });
+  }
+
+  onMouseMove(e) {
+    const rect = this.canvas.getBoundingClientRect();
+    this.mouse.px = this.mouse.x;
+    this.mouse.py = this.mouse.y;
+    this.mouse.x = e.clientX - rect.left;
+    this.mouse.y = e.clientY - rect.top;
+    this.mouse.moving = true;
+    this.spawnTrail();
+  }
+
+  onTouchMove(e) {
+    if (!e.touches[0]) return;
+    const rect = this.canvas.getBoundingClientRect();
+    this.mouse.x = e.touches[0].clientX - rect.left;
+    this.mouse.y = e.touches[0].clientY - rect.top;
+    this.mouse.moving = true;
+    this.spawnTrail();
+  }
+
+  onTouchEnd() {
+    this.mouse.moving = false;
+  }
+
+  spawnTrail() {
+    if (this.particles.length >= this.config.maxParticles) return;
+    const count = this.config.spawnRate;
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const dist = Math.random() * 6;
+      const color = this.config.colors[Math.floor(Math.random() * this.config.colors.length)];
+      const size = this.config.minSize + Math.random() * (this.config.maxSize - this.config.minSize);
+      this.particles.push({
+        x: this.mouse.x + Math.cos(angle) * dist,
+        y: this.mouse.y + Math.sin(angle) * dist,
+        vx: Math.cos(angle) * 0.3,
+        vy: Math.sin(angle) * 0.3,
+        size: size,
+        baseSize: size,
+        opacity: 0.6 + Math.random() * 0.3,
+        color: color,
+        ang: Math.random() * Math.PI * 2,
+        drift: this.config.drift * (0.5 + Math.random() * 0.5)
+      });
+    }
+  }
+
+  step() {
+    const { attractRadius, attractForce, friction, fadeSpeed, drift } = this.config;
+
+    for (let i = this.particles.length - 1; i >= 0; i--) {
+      const p = this.particles[i];
+
+      // Drift natural
+      p.ang += p.drift * 0.01;
+      p.vx += Math.cos(p.ang) * 0.0008;
+      p.vy += Math.sin(p.ang) * 0.0008;
+
+      // Attract ke mouse jika dekat
+      if (this.mouse.x != null) {
+        const dx = this.mouse.x - p.x;
+        const dy = this.mouse.y - p.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < attractRadius && dist > 1) {
+          const f = attractForce * (1 - dist / attractRadius) / dist;
+          p.vx += dx * f;
+          p.vy += dy * f;
+        }
+      }
+
+      // Apply velocity
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vx *= friction;
+      p.vy *= friction;
+
+      // Fade out
+      p.opacity -= fadeSpeed;
+
+      // Hapus partikel mati
+      if (p.opacity <= 0) {
+        this.particles.splice(i, 1);
+        continue;
+      }
+
+      // Wrap around edges
+      const m = 20;
+      if (p.x < -m) p.x = this.W + m;
+      if (p.x > this.W + m) p.x = -m;
+      if (p.y < -m) p.y = this.H + m;
+      if (p.y > this.H + m) p.y = -m;
+    }
+  }
+
+  draw() {
+    this.ctx.clearRect(0, 0, this.W, this.H);
+    this.ctx.globalCompositeOperation = "lighter";
+
+    for (const p of this.particles) {
+      const [r, g, b] = p.color;
+      const radius = Math.max(0.1, p.size * 2.5);
+
+      // Radial gradient untuk glow lembut
+      const grad = this.ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius);
+      grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${p.opacity})`);
+      grad.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${p.opacity * 0.3})`);
+      grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+
+      this.ctx.fillStyle = grad;
+      this.ctx.beginPath();
+      this.ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+      this.ctx.fill();
+    }
+
+    this.ctx.globalCompositeOperation = "source-over";
+  }
+
+  loop() {
+    if (!this.active || !this.visible) return;
+    this.step();
+    this.draw();
+    this.raf = requestAnimationFrame(this.loop);
+  }
+
+  start() { if (!this.active) { this.active = true; this.loop(); } }
+  stop() { this.active = false; cancelAnimationFrame(this.raf); }
+}
+
+// Init Mouse Trail Particles (Hero only)
+const trailCanvas = document.getElementById("hero-trail");
+if (trailCanvas && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  new MouseTrailParticles("hero-trail", ".hero");
+}
+
 // tsParticles - Hero Background
 async function initTsParticles() {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
