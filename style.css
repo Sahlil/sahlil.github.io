@@ -1648,7 +1648,7 @@ img, svg {
 }
 
 body.loaded #preloader {
-  animation: slideUp var(--transition-slow) forwards;
+  animation: slideUp 250ms ease forwards;
 }
   opacity: 0;
   visibility: hidden;
