@@ -1,25 +1,60 @@
-let progress = 0;
+// Preloader — sinkron dengan loading web sungguhan
 const progressEl = document.getElementById("preloader-progress");
-function startProgress(){
-  if(!progressEl) return;
-  const step = ()=>{
-    progress = Math.min(progress+1,100);
-    progressEl.textContent = progress + "%";
-    if(progress<100){
-      requestAnimationFrame(step);
-    } else {
-      finishLoading();
-    }
-  };
-  requestAnimationFrame(step);
+const preloader = document.getElementById("preloader");
+
+function setProgress(val) {
+  if (!progressEl) return;
+  const v = Math.max(0, Math.min(100, Math.round(val)));
+  progressEl.textContent = v + "%";
 }
-function finishLoading(){
+
+function finishLoading() {
   if (document.body.classList.contains("loaded")) return;
+  setProgress(100);
   document.body.classList.add("loaded");
-  setTimeout(() => document.getElementById("preloader")?.remove(), 500);
+  // Hapus preloader setelah animasi slideUp selesai
+  setTimeout(() => preloader?.remove(), 450);
 }
-window.addEventListener("load", startProgress);
-setTimeout(finishLoading, 5000);
+
+// Stage 1: DOM ready (bukan tunggu load penuh)
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => setProgress(30));
+} else {
+  setProgress(30);
+}
+
+// Stage 2: Pantau resource loading real-time
+const trackResources = performance.getEntriesByType("resource");
+const totalResources = trackResources.length || 1;
+let loadedCount = 0;
+
+if ("PerformanceObserver" in window) {
+  const obs = new PerformanceObserver((list) => {
+    for (const entry of list.getEntries()) {
+      loadedCount++;
+      // Resource loaded: 30% → 85%
+      const pct = 30 + Math.min(55, (loadedCount / totalResources) * 55);
+      setProgress(pct);
+    }
+  });
+  try {
+    obs.observe({ type: "resource", buffered: true });
+  } catch (e) {
+    // Fallback: observer tidak support
+  }
+}
+
+// Stage 3: Window load = 95%
+window.addEventListener("load", () => {
+  setProgress(95);
+  // Kasih sedikit waktu untuk render pertama
+  requestAnimationFrame(() => {
+    setTimeout(finishLoading, 100);
+  });
+});
+
+// Safety net: max 3 detik (bukan 5)
+setTimeout(finishLoading, 3000);
 
 const yearEl = document.getElementById("year");
 if (yearEl) {
