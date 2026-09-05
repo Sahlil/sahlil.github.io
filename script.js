@@ -380,6 +380,64 @@ class ParticleSystem {
   stop() { this.active = false; cancelAnimationFrame(this.raf); }
 }
 
+// tsParticles - Hero Background
+async function initTsParticles() {
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) return;
+  if (!window.tsParticles) {
+    console.error("tsParticles SDK tidak tersedia — cek CDN");
+    return;
+  }
+
+  const isMobile = window.innerWidth <= 768;
+  const particleCount = isMobile ? 120 : 200;
+  const container = document.getElementById("tsparticles");
+  if (!container) {
+    console.error("#tsparticles container tidak ditemukan");
+    return;
+  }
+
+  await tsParticles.load("tsparticles", {
+    fpsLimit: 60,
+    pauseOnOutsideViewport: true,
+    background: { color: "transparent" },
+    fullScreen: { enable: false },
+    particles: {
+      number: { value: particleCount, density: { enable: true, area: 800 } },
+      color: { value: ["#e87d4a", "#f5a56b", "#d45d2e", "#ffb36b"] },
+      shape: { type: "circle" },
+      opacity: { value: { min: 0.15, max: 0.5 }, animation: { enable: true, speed: 0.3, minimumValue: 0.1, sync: false } },
+      size: { value: { min: 1, max: 3 }, animation: { enable: true, speed: 2, minimumValue: 0.5, sync: false } },
+      links: { enable: false },
+      move: {
+        enable: true,
+        speed: 0.4,
+        direction: "none",
+        random: true,
+        straight: false,
+        outModes: { default: "bounce" },
+        drift: 0.02,
+        attract: { enable: false }
+      }
+    },
+    interactivity: {
+      detectsOn: "window",
+      events: {
+        onHover: { enable: !isMobile, mode: "repulse" },
+        onClick: { enable: false },
+        resize: true
+      },
+      modes: {
+        repulse: { distance: 120, duration: 0.8, factor: 100 },
+        bubble: { distance: 200, size: 8, duration: 2, opacity: 0.8 }
+      }
+    },
+    detectRetina: true
+  });
+}
+
+initTsParticles();
+
 // Init Global Particles
 const globalCanvas = document.getElementById("globalParticles");
 if (globalCanvas && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
