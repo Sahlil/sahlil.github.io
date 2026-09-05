@@ -1649,7 +1649,6 @@ img, svg {
 
 body.loaded #preloader {
   animation: slideUp 250ms ease forwards;
-}
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
