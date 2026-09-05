@@ -362,7 +362,7 @@ img, svg {
 .hero-mesh::after {
   width: 300px;
   height: 300px;
-  bottom: -80px;
+  top: -100px;
   right: -80px;
   background: var(--accent-strong);
   animation-delay: -7s;
