@@ -149,10 +149,14 @@ function typeSectionTexts(section) {
     el.textContent = "";
     el.classList.add("is-typing");
     let i = 0;
+    const len = text.length;
+    // Untuk teks panjang, ketik 2-3 karakter sekaligus (burst) agar tidak lambat
+    const burst = len > 120 ? 3 : (len > 60 ? 2 : 1);
     const timer = setInterval(() => {
-      el.textContent = text.slice(0, ++i);
-      if (i >= text.length) { clearInterval(timer); el.classList.remove("is-typing"); }
-    }, 28);
+      i = Math.min(i + burst, len);
+      el.textContent = text.slice(0, i);
+      if (i >= len) { clearInterval(timer); el.classList.remove("is-typing"); }
+    }, 12);
   });
 }
 
