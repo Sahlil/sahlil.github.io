@@ -764,6 +764,26 @@ img, svg {
   transform: translateY(-2px);
 }
 
+/* Download CV button — ghost dengan accent hover */
+.btn-download {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.btn-download svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.btn-download:hover {
+  background: rgba(232, 125, 74, 0.1);
+  border-color: var(--accent);
+  color: var(--accent-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(232, 125, 74, 0.2);
+}
+
 .social {
   display: flex;
   align-items: center;
