@@ -1468,6 +1468,15 @@ img, svg {
     padding-top: 24px;
   }
 
+  .hero-media {
+    max-width: 340px;
+    margin: 32px auto 0;
+  }
+
+  .hero-media img {
+    transform: scale(1.1) translateY(-6%);
+  }
+
   .stat-value {
     font-size: clamp(1.75rem, 8vw, 2.5rem);
   }
