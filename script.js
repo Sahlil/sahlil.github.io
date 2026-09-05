@@ -1,10 +1,25 @@
-const hidePreloader = () => {
+let progress = 0;
+const progressEl = document.getElementById("preloader-progress");
+function startProgress(){
+  if(!progressEl) return;
+  const step = ()=>{
+    progress = Math.min(progress+1,100);
+    progressEl.textContent = progress + "%";
+    if(progress<100){
+      requestAnimationFrame(step);
+    } else {
+      finishLoading();
+    }
+  };
+  requestAnimationFrame(step);
+}
+function finishLoading(){
   if (document.body.classList.contains("loaded")) return;
   document.body.classList.add("loaded");
   setTimeout(() => document.getElementById("preloader")?.remove(), 500);
-};
-window.addEventListener("load", hidePreloader);
-setTimeout(hidePreloader, 3000);
+}
+window.addEventListener("load", startProgress);
+setTimeout(finishLoading, 5000);
 
 const yearEl = document.getElementById("year");
 if (yearEl) {

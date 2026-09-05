@@ -1535,7 +1535,18 @@ img, svg {
   letter-spacing: 0.1em;
 }
 
+.preloader-progress {
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 10vw, 8rem);
+  color: var(--ink);
+}
+
 body.loaded #preloader {
+  animation: slideUp var(--transition-slow) forwards;
+}
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -1544,6 +1555,11 @@ body.loaded #preloader {
 @keyframes preloader-pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.6; transform: scale(1.02); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
 }
 
 @keyframes preloader-progress {
