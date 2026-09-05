@@ -508,8 +508,24 @@ img, svg {
   display: grid;
   gap: 48px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   align-items: center;
+}
+
+/* Allow pointer events to pass through hero-content to tsparticles,
+   but enable them for interactive children (buttons, links, etc.) */
+.hero-content {
+  pointer-events: none;
+}
+
+.hero-content > *,
+.hero-content .cta-group,
+.hero-content .cta-group .btn,
+.hero-content .social,
+.hero-content .social .icon-link,
+.hero-content .hero-stats,
+.hero-media {
+  pointer-events: auto;
 }
 
 @media (min-width: 768px) {
