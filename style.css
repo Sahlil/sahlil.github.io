@@ -439,7 +439,6 @@ img, svg {
     animation: none;
     opacity: 0.1;
   }
-  #particleCanvas,
   .section-particles,
   #globalParticles {
     display: none;
