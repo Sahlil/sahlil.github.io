@@ -445,7 +445,6 @@ img, svg {
   }
 }
 
-/* Interactive particle canvas - Hero (legacy, kept for compat) */
 /* tsParticles - Hero background */
 #tsparticles {
   position: absolute;
@@ -489,19 +488,6 @@ img, svg {
 
 .hero-bg {
   display: none;
-}
-
-.hero-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.7) 0%,
-    rgba(0, 0, 0, 0.4) 40%,
-    rgba(0, 0, 0, 0.2) 70%,
-    transparent 100%
-  );
 }
 
 .hero-grid {
@@ -1468,14 +1454,14 @@ img, svg {
     padding-top: 24px;
   }
 
-  .hero-media {
-    max-width: 340px;
-    margin: 32px auto 0;
-  }
+    .hero-media {
+      max-width: 340px;
+      margin: 32px auto 0;
+    }
 
-  .hero-media img {
-    transform: scale(1.1) translateY(-6%);
-  }
+    .hero-media img {
+      transform: scale(1.1) translateY(-6%);
+    }
 
   .stat-value {
     font-size: clamp(1.75rem, 8vw, 2.5rem);
