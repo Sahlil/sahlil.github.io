@@ -459,7 +459,8 @@ img, svg {
   }
 }
 
-/* Mouse trail canvas - above tsparticles, below hero-grid */
+/* Vortex cursor canvas - above tsparticles, below hero-grid (DISABLED) */
+/*
 #hero-trail {
   position: absolute;
   inset: 0;
@@ -472,6 +473,7 @@ img, svg {
     display: none;
   }
 }
+*/
 
 /* Global particle canvas - full viewport */
 #globalParticles {
