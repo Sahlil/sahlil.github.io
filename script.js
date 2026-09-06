@@ -69,7 +69,7 @@ function setMenuState(isOpen) {
   menuToggle.classList.toggle("is-open", isOpen);
   siteNav.classList.toggle("is-open", isOpen);
   menuToggle.setAttribute("aria-expanded", String(isOpen));
-  menuToggle.setAttribute("aria-label", isOpen ? "Tutup menu navigasi" : "Buka menu navigasi");
+  menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
 }
 
 if (menuToggle && siteNav) {
@@ -231,7 +231,7 @@ async function initTsParticles() {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce) return;
   if (!window.tsParticles) {
-    console.error("tsParticles SDK tidak tersedia — cek CDN");
+    console.error("tsParticles SDK unavailable — check CDN");
     return;
   }
 
@@ -239,7 +239,7 @@ async function initTsParticles() {
   const particleCount = isMobile ? 120 : 200;
   const container = document.getElementById("tsparticles");
   if (!container) {
-    console.error("#tsparticles container tidak ditemukan");
+    console.error("#tsparticles container not found");
     return;
   }
 
@@ -441,6 +441,8 @@ class ParticleSystem {
 // Mouse Trail Particles - Hero only
 // Efek partikel mengikuti kursor (attract + trail spawn) dengan glow blend.
 // Insipirasi: antigravity.google
+// (DISABLED — lihat implementasi VortexCursorParticles jika diperlukan lagi)
+/*
 class MouseTrailParticles {
   constructor(canvasId, heroSelector) {
     this.canvas = document.getElementById(canvasId);
@@ -651,12 +653,15 @@ class MouseTrailParticles {
   start() { if (!this.active) { this.active = true; this.loop(); } }
   stop() { this.active = false; cancelAnimationFrame(this.raf); }
 }
+*/
 
-// Init Mouse Trail Particles (Hero only)
+// Init Mouse Trail Particles (Hero only) — DISABLED
+/*
 const trailCanvas = document.getElementById("hero-trail");
 if (trailCanvas && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   new MouseTrailParticles("hero-trail", ".hero");
 }
+*/
 
 // Init Global Particles
 const globalCanvas = document.getElementById("globalParticles");
