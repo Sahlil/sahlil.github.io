@@ -1204,75 +1204,65 @@ img, svg {
   font-size: 0.75rem;
 }
 
-.documentation-grid {
+/* Services Section */
+.services-grid {
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 
-@media (min-width: 640px) {
-  .documentation-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .documentation-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.doc-card {
+.service-card {
   background: var(--card);
   border-radius: var(--radius);
   border: 1px solid var(--card-border);
-  overflow: hidden;
+  padding: 28px;
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
   transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
 }
 
-.doc-card:hover {
+.service-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-card-hover);
   border-color: var(--card-border-hover);
 }
 
-.doc-card:focus-visible {
+.service-card:focus-visible {
   outline: none;
   box-shadow: var(--focus-ring);
 }
 
-.doc-media {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
+.service-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--bg-soft);
+  border-radius: 12px;
+  color: var(--accent);
 }
 
-.doc-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform var(--transition-slow);
+.service-icon svg {
+  width: 24px;
+  height: 24px;
 }
 
-.doc-card:hover .doc-media img {
-  transform: scale(1.05);
-}
-
-.doc-caption {
-  padding: 20px;
+.service-body {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.doc-caption h3 {
-  font-size: 1.1rem;
+.service-body h3 {
+  font-size: 1.15rem;
   color: var(--ink);
 }
 
-.doc-caption p {
+.service-body p {
   color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.6;
@@ -1473,8 +1463,7 @@ img, svg {
     font-size: clamp(1.75rem, 8vw, 2.5rem);
   }
 
-  .project-card,
-  .doc-card {
+  .project-card {
     width: 100%;
   }
 
@@ -1528,8 +1517,23 @@ img, svg {
     height: 5px;
   }
 
-  .documentation-grid {
+  .services-grid {
     grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    flex-direction: column;
+    padding: 24px;
+  }
+
+  .service-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .service-icon svg {
+    width: 20px;
+    height: 20px;
   }
 
   .contact-card {
@@ -1704,9 +1708,8 @@ body.loaded #preloader {
     .icon-link,
     .experience-card,
     .project-card,
-    .doc-card,
+    .service-card,
     .project-card-thumb img,
-    .doc-media img,
     .skill-tag,
     .menu-toggle span {
       transition: none;
