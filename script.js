@@ -160,7 +160,7 @@ function typeSectionTexts(section) {
   });
 }
 
-const typeSections = document.querySelectorAll("#about, #skills, #experience, #projects, #documentation, #contact");
+const typeSections = document.querySelectorAll("#about, #skills, #experience, #projects, #services, #contact");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 if (!reduceMotion && "IntersectionObserver" in window && typeSections.length) {
   const typeObs = new IntersectionObserver((entries, o) => {
